@@ -1,5 +1,8 @@
 import speedtest as st 
 from termcolor import colored
+import colors
+
+
 choices = [
     'UP',
     'DOWN',
@@ -7,33 +10,33 @@ choices = [
     'ALL'
 ]
 
-color = 'yellow'
+
 userinput = str(input('>>> ')).upper()
 speed = st.Speedtest()
 
 
 def check_download_speed():
     msg = f'Checking download speed...'
-    print(colored(msg,color))
+    print(colored(msg))
     down = speed.download()
-    print(f'Your current download speed: {round(down / 1000 / 1000, 1)} Mbit/s\n')
+    print(f'Your current {colors.GREEN}download{colors.RESET} speed: {colors.RED}{round(down / 1000 / 1000, 1)} Mbit/s\n{colors.RESET}')
     
     
     
 def check_upload_speed():
     msg = f'Checking upload speed...'
-    print(colored(msg,color))
+    print(colored(msg))
     up = speed.upload()
-    print(f'Your current upload speed: {round(up / 1000 / 1000, 1)} Mbit/s\n')
+    print(f'Your current {colors.GREEN}upload {colors.RESET}speed: {colors.RED}{round(up / 1000 / 1000, 1)} Mbit/s\n{colors.RESET}')
     
     
 def check_ping():
     msg = f'Checking ping...'
-    print(colored(msg,color))
+    print(colored(msg))
     servers = []
     speed.get_servers(servers)
     server = speed.get_best_server()
-    print(f'Your current ping: {server["latency"]} ms\n')
+    print(f'Your current {colors.YELLOW}ping: {colors.BLUE}{server["latency"]} ms\n')
 
 
 if userinput in choices:
